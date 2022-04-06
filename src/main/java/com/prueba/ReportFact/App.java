@@ -1,10 +1,14 @@
 package com.prueba.ReportFact;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -91,13 +95,69 @@ public class App
             JasperExportManager.exportReportToPdfFile(jprint, fileNamePdf);
             //JasperExportManager.exportReportToPdfStream(jprint, out);
             System.out.println("Archivo creado ...");
+            
             /*JasperViewer view = new JasperViewer(jprint, false);
             view.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             view.setVisible(true);*/
+          //noa credito
+        	String fileNamePdfnc = "C:/Users/muert/Downloads/notacredito.pdf";
+        	String fileNameJrxmlnc = "C:/Users/muert/Desktop/EspaciosTrabajo/ReportesJuan/ReportFact/src/main/java/reportes/reportNotaCredito.jrxml";
+        	
+        	JasperDesign jasperDesignnc = JRXmlLoader.load(fileNameJrxmlnc);
+        	JasperReport reportnc = JasperCompileManager.compileReport(jasperDesignnc); 
+        	
+        	
+            String codNotaCredito = "F005-1YAMIL64";
+            String empresa = "EMPRESA DISTRIBUIDORA JUANCHO DEVELOPERS";
+            String direccionNc = "Av. Los distribuidores Mz.J4 Lt.68";
+            String RUC = "20233465125";
+            String facturaElectronica = "E005-1YAMIL64";
+            String senores = "Bolsa de Valores de Lima S.A.A.";
+            //Date fechaEmisionNc = new Date();
+            LocalDateTime fechaEmisionNc = LocalDateTime.now();
+            System.out.println(DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH).format(fechaEmisionNc));
+            System.out.println(fechaEmisionNc);
+            String rucDetalle = "789456321";
+            String tipoMoneda = "Soles";
+            String motivoSustento = "Pruebas de reportes para Nota de credito con Juancho Developers S.A.C.";
+            String cabeceraDetalle = "Ajustes - montos y/o fechas de pago";
+            
+            Double igvTotalNc = 12.89;
+            Double totalImporteNc = 64.89;
+            
+            HashMap<String, Object> parametersNotaCredito = new HashMap<String, Object>();
+           
+            parametersNotaCredito.put("logoEmpresa", logoEmpresa);
+            parametersNotaCredito.put("codNotaCredito", codNotaCredito);
+            parametersNotaCredito.put("empresa", empresa);
+            parametersNotaCredito.put("direccion", direccionNc);
+            parametersNotaCredito.put("RUC", RUC);
+            parametersNotaCredito.put("facturaElectronica", facturaElectronica);
+            parametersNotaCredito.put("senores", senores);
+            
+            parametersNotaCredito.put("fechaEmision", DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH).format(fechaEmisionNc));
+            parametersNotaCredito.put("rucDetalle", rucDetalle);
+            parametersNotaCredito.put("tipoMoneda", tipoMoneda);
+            parametersNotaCredito.put("motivoSustento", motivoSustento);
+            parametersNotaCredito.put("cabeceraDetalle", cabeceraDetalle);
+            
+            parametersNotaCredito.put("igvTotal", igvTotalNc);
+            parametersNotaCredito.put("totalImporte", totalImporteNc);
+            
+            
+            
+            JasperPrint jprint2 = JasperFillManager.fillReport(reportnc, parametersNotaCredito, new JREmptyDataSource());
+            
+            JasperExportManager.exportReportToPdfFile(jprint2, fileNamePdfnc);
+            
+            System.out.println("Archivo creado nota credito ...");
+        	// nota credito
+            
+          
             
             
         }catch(JRException ex){
-            ex.getMessage();
+            System.out.println(ex.getMessage());
         }
         
     
