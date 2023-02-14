@@ -1,0 +1,595 @@
+openapi: 3.0.1
+info:
+  title: Report Management Api
+  description: Template from Genesis Framework to build microservices
+  version: v1.0.1
+x-devops-properties:
+  apiType: ne
+  apiDomain: reportmanagement
+  apiName: report
+  apiPlatform: oc
+servers:
+  - url: https://apimngr-genesis-prod.azure-api.net/API-NE-rating-reportmanagement-OC/v1.0.1
+paths:
+  /wappe/report/async :
+    get:
+      tags:
+        - report-controller
+      summary: Genera un reporte corporativo o residencial de manera asincrona
+      description: Genera un reporte corporativo o residencial de manera asincrona
+      operationId: retrieveReportAsyncUsingGET_3
+      parameters:
+        - name: customerType
+          in: query
+          description: Query Param customerType
+          required: false
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description: Query Param channel
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Query Param type
+          required: true
+          schema:
+            type: string
+        - name: nationalIdType
+          in: query
+          description: Query Param nationalIdType
+          schema:
+            type: string
+        - name: nationalId
+          in: query
+          description: Query Param nationalId
+          schema:
+            type: string
+        - name: accountId
+          in: query
+          description: Query Param accountId
+          schema:
+            type: string
+        - name: lineOfBusinessType
+          in: query
+          description: Query Param lineOfBusinessType
+          schema:
+            type: string
+        - name: productType
+          in: query
+          description: Query Param productType
+          schema:
+            type: string
+        - name: publicId
+          in: query
+          description: Query Param publicId
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: Query Param startDate
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          description: Query Param endDate
+          schema:
+            type: string
+        - name: platform
+          in: query
+          description: Platform
+          schema:
+            type: string
+        - name: UNICA-ServiceId
+          in: header
+          required: true
+          schema:
+            type: string
+            default: 1b567df3-0fa8-4ad2-ab0b-a97291904361
+        - name: UNICA-Application
+          in: header
+          required: true
+          schema:
+            type: string
+            default: wappe
+        - name: UNICA-PID
+          in: header
+          required: true
+          schema:
+            type: string
+            default: 550e8400-e29b-41d4-a716-446655440000
+        - name: UNICA-User
+          in: header
+          required: true
+          schema:
+            type: string
+            default: admin
+        - name: X-IBM-Client-Id
+          in: header
+          schema:
+            type: string
+            default: 9a8ba84e-35ba-4488-0de1-04e436f3e38e
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+            default: Bearer kZTctMDRlNDM2ZmVlMzBl3gw3C83XdPUdxwYjC5dqonYG_YLvIggUf
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReportAsyncResponse'
+              examples:
+                default:
+                  value: 
+  /wappe/report/sftp/download:
+    get:
+      tags:
+        - report-controller
+      summary: downloadFile
+      description: downloadFile
+      operationId: downloadFileUsingGET_3
+      parameters:
+        - name: urlSftp
+          in: query
+          description: Query Param urlSftp
+          required: true
+          schema:
+            type: string
+        - name: UNICA-ServiceId
+          in: header
+          required: true
+          schema:
+            type: string
+            default: 1b567df3-0fa8-4ad2-ab0b-a97291904361
+        - name: UNICA-Application
+          in: header
+          required: true
+          schema:
+            type: string
+            default: wappe
+        - name: UNICA-PID
+          in: header
+          required: true
+          schema:
+            type: string
+            default: 550e8400-e29b-41d4-a716-446655440000
+        - name: UNICA-User
+          in: header
+          required: true
+          schema:
+            type: string
+            default: admin
+        - name: X-IBM-Client-Id
+          in: header
+          schema:
+            type: string
+            default: 9a8ba84e-35ba-4488-0de1-04e436f3e38e
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+            default: Bearer kZTctMDRlNDM2ZmVlMzBl3gw3C83XdPUdxwYjC5dqonYG_YLvIggUf
+      responses:
+        '200':
+          description: OK
+          content:
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Resource'
+  /wappe/report/dashboard/retrieveDashboard:
+    get:
+      tags:
+        - report-controller
+      summary: Obtiene los valores acumulados de llamadas salientes y entrantes con la finalidad de armar el dashboard
+      description: Obtiene los valores acumulados de llamadas salientes y entrantes con la finalidad de armar el dashboard
+      operationId: retrieveReportDashboardUsingGET_3
+      parameters:
+        - name: customerType
+          in: query
+          description: Query Param customerType
+          required: true
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description: Query Param channel
+          required: true
+          schema:
+            type: string
+        - name: bucketType
+          in: query
+          description: Query Param bucketType
+          required: true
+          schema:
+            type: string
+        - name: product
+          in: query
+          description: Query Param product
+          required: true
+          schema:
+            type: string
+        - name: usageType
+          in: query
+          description: Query Param usageType
+          required: true
+          schema:
+            type: string
+        - name: period
+          in: query
+          description: Query Param period
+          required: true
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: Query Param startDate
+          required: true
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          description: Query Param endDate
+          required: true
+          schema:
+            type: string
+        - name: publicId
+          in: query
+          description: Query Param publicId
+          schema:
+            type: string
+        - name: nationalIdType
+          in: query
+          description: Query Param nationalIdType
+          schema:
+            type: string
+        - name: nationalId
+          in: query
+          description: Query Param nationalId
+          schema:
+            type: string
+        - name: accountId
+          in: query
+          description: Query Param accountId
+          schema:
+            type: string
+        - name: UNICA-ServiceId
+          in: header
+          required: true
+          schema:
+            type: string
+            default: 1b567df3-0fa8-4ad2-ab0b-a97291904361
+        - name: UNICA-Application
+          in: header
+          required: true
+          schema:
+            type: string
+            default: wappe
+        - name: UNICA-PID
+          in: header
+          required: true
+          schema:
+            type: string
+            default: 550e8400-e29b-41d4-a716-446655440000
+        - name: UNICA-User
+          in: header
+          required: true
+          schema:
+            type: string
+            default: admin
+        - name: X-IBM-Client-Id
+          in: header
+          schema:
+            type: string
+            default: 9a8ba84e-35ba-4488-0de1-04e436f3e38e
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+            default: Bearer kZTctMDRlNDM2ZmVlMzBl3gw3C83XdPUdxwYjC5dqonYG_YLvIggUf
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    File:
+      title: File
+      type: object
+      properties:
+        absolute:
+          type: boolean
+        absoluteFile:
+          $ref: '#/components/schemas/File'
+        absolutePath:
+          type: string
+        canonicalFile:
+          $ref: '#/components/schemas/File'
+        canonicalPath:
+          type: string
+        directory:
+          type: boolean
+        file:
+          type: boolean
+        freeSpace:
+          type: integer
+          format: int64
+        hidden:
+          type: boolean
+        name:
+          type: string
+        parent:
+          type: string
+        parentFile:
+          $ref: '#/components/schemas/File'
+        path:
+          type: string
+        totalSpace:
+          type: integer
+          format: int64
+        usableSpace:
+          type: integer
+          format: int64
+    GenesisException:
+      title: GenesisException
+      type: object
+      properties:
+        exceptionDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenesisExceptionDetail'
+          description: Lista de detalles del error
+        exceptionId:
+          type: string
+          description: Identificador de la excepción
+          example: SVC0001
+        exceptionText:
+          type: string
+          description: Descripcion del error de Sistema
+          example: Mensaje de error
+        moreInfo:
+          type: string
+          description: URI donde se proporciona más información sobre la excepción
+          example: https://help.tdp.com/2020
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Serializable'
+          description: Lista de propiedades especiales.
+        userMessage:
+          type: string
+          description: Descripcion del error de Sistema
+          example: Error al llamar al servicio
+      description: Datos del error de sistema.
+    GenesisExceptionDetail:
+      title: GenesisExceptionDetail
+      type: object
+      properties:
+        code:
+          type: string
+          description: Codigo de error del Detalle/Proveedor
+          example: MB0008
+        component:
+          type: string
+          description: Nombre del componente de falla
+          example: MB.ProductsV2
+        description:
+          type: string
+          description: Descripcion del Detalle
+          example: Codigo invalido para el canal
+      description: Datos del error t&eacute;cnico.
+    InputStream:
+      title: InputStream
+      type: object
+    ReportAsyncResponse:
+      title: ReportAsyncResponse
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportDetailResponse'
+        uniqueTrxId:
+          type: string
+    ReportDashboardResponse:
+      title: ReportDashboardResponse
+      type: object
+      properties:
+        body:
+          $ref: '#/components/schemas/ReportDashboardResponse'
+        statusCode:
+          enum:
+            - 100 CONTINUE
+            - 101 SWITCHING_PROTOCOLS
+            - 102 PROCESSING
+            - 103 CHECKPOINT
+            - 200 OK
+            - 201 CREATED
+            - 202 ACCEPTED
+            - 203 NON_AUTHORITATIVE_INFORMATION
+            - 204 NO_CONTENT
+            - 205 RESET_CONTENT
+            - 206 PARTIAL_CONTENT
+            - 207 MULTI_STATUS
+            - 208 ALREADY_REPORTED
+            - 226 IM_USED
+            - 300 MULTIPLE_CHOICES
+            - 301 MOVED_PERMANENTLY
+            - 302 FOUND
+            - 302 MOVED_TEMPORARILY
+            - 303 SEE_OTHER
+            - 304 NOT_MODIFIED
+            - 305 USE_PROXY
+            - 307 TEMPORARY_REDIRECT
+            - 308 PERMANENT_REDIRECT
+            - 400 BAD_REQUEST
+            - 401 UNAUTHORIZED
+            - 402 PAYMENT_REQUIRED
+            - 403 FORBIDDEN
+            - 404 NOT_FOUND
+            - 405 METHOD_NOT_ALLOWED
+            - 406 NOT_ACCEPTABLE
+            - 407 PROXY_AUTHENTICATION_REQUIRED
+            - 408 REQUEST_TIMEOUT
+            - 409 CONFLICT
+            - 410 GONE
+            - 411 LENGTH_REQUIRED
+            - 412 PRECONDITION_FAILED
+            - 413 PAYLOAD_TOO_LARGE
+            - 413 REQUEST_ENTITY_TOO_LARGE
+            - 414 URI_TOO_LONG
+            - 414 REQUEST_URI_TOO_LONG
+            - 415 UNSUPPORTED_MEDIA_TYPE
+            - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+            - 417 EXPECTATION_FAILED
+            - 418 I_AM_A_TEAPOT
+            - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+            - 420 METHOD_FAILURE
+            - 421 DESTINATION_LOCKED
+            - 422 UNPROCESSABLE_ENTITY
+            - 423 LOCKED
+            - 424 FAILED_DEPENDENCY
+            - 425 TOO_EARLY
+            - 426 UPGRADE_REQUIRED
+            - 428 PRECONDITION_REQUIRED
+            - 429 TOO_MANY_REQUESTS
+            - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+            - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+            - 500 INTERNAL_SERVER_ERROR
+            - 501 NOT_IMPLEMENTED
+            - 502 BAD_GATEWAY
+            - 503 SERVICE_UNAVAILABLE
+            - 504 GATEWAY_TIMEOUT
+            - 505 HTTP_VERSION_NOT_SUPPORTED
+            - 506 VARIANT_ALSO_NEGOTIATES
+            - 507 INSUFFICIENT_STORAGE
+            - 508 LOOP_DETECTED
+            - 509 BANDWIDTH_LIMIT_EXCEEDED
+            - 510 NOT_EXTENDED
+            - 511 NETWORK_AUTHENTICATION_REQUIRED
+          type: string
+        statusCodeValue:
+          type: integer
+          format: int32
+    ReportDetailResponse:
+      title: ReportDetailResponse
+      type: object
+      properties:
+        code:
+          type: string
+        generationDate:
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+    Resource:
+      title: Resource
+      type: object
+      properties:
+        description:
+          type: string
+        file:
+          $ref: '#/components/schemas/File'
+        filename:
+          type: string
+        inputStream:
+          $ref: '#/components/schemas/InputStream'
+        open:
+          type: boolean
+        readable:
+          type: boolean
+        uri:
+          $ref: '#/components/schemas/URI'
+        url:
+          $ref: '#/components/schemas/URL'
+    Serializable:
+      title: Serializable
+      type: object
+    URI:
+      title: URI
+      type: object
+      properties:
+        absolute:
+          type: boolean
+        authority:
+          type: string
+        fragment:
+          type: string
+        host:
+          type: string
+        opaque:
+          type: boolean
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        query:
+          type: string
+        rawAuthority:
+          type: string
+        rawFragment:
+          type: string
+        rawPath:
+          type: string
+        rawQuery:
+          type: string
+        rawSchemeSpecificPart:
+          type: string
+        rawUserInfo:
+          type: string
+        scheme:
+          type: string
+        schemeSpecificPart:
+          type: string
+        userInfo:
+          type: string
+    URL:
+      title: URL
+      type: object
+      properties:
+        authority:
+          type: string
+        content:
+          type: object
+        defaultPort:
+          type: integer
+          format: int32
+        file:
+          type: string
+        host:
+          type: string
+        path:
+          type: string
+        port:
+          type: integer
+          format: int32
+        protocol:
+          type: string
+        query:
+          type: string
+        ref:
+          type: string
+        userInfo:
+          type: string
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]
+tags:
+  - name: report-controller
+    description: Report Controller
